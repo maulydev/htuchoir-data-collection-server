@@ -1,13 +1,20 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from membership.serializers import MemberSerializer
+from membership.serializers import MemberSerializer, ContactSerializer
 from rest_framework import status
-from membership.models import Member
+from membership.models import Member, Contact
 
 @api_view(['GET'])
 def id_maker(request):
     id = Member.objects.all().count()
     return Response({"id": id+1})
+
+
+@api_view(['GET'])
+def contact(request):
+    contacts = Contact.objects.all()
+    serializer = ContactSerializer(contacts, many=True)
+    return Response(serializer.data)
 
 
 @api_view(['POST'])

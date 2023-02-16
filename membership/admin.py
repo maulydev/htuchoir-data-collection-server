@@ -1,5 +1,5 @@
 from django.contrib import admin
-from membership.models import Member
+from membership.models import Member, Contact
 
 
 admin.site.site_header = 'HTU Choir Administration'
@@ -9,4 +9,9 @@ class MemberAdmin(admin.ModelAdmin):
     readonly_fields = ['membership_id']
 
 
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ['name', 'title', 'phone', 'date']
+
+
 admin.site.register(Member, MemberAdmin)
+admin.site.register(Contact, ContactAdmin)
